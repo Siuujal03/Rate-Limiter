@@ -5,8 +5,8 @@ import java.time.Instant;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import com.example.ratelimiter.Models.UserRequestInfo;
 
@@ -34,6 +34,11 @@ public class RateLimiterService
         Instant currentTime = Instant.now();
 
         return userRequestInfo.tryAndRequest(currentTime, limit, window);
+    }
+
+    public void cleanup(Instant threshold)
+    {
+        requests.entrySet().removeIf(entry -> entry.getValue().isInactive(threshold));
     }
 
 }

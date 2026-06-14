@@ -23,6 +23,8 @@ public class RateLimiterInterceptor implements HandlerInterceptor
         String ipAddress = request.getRemoteAddr();
         boolean isAccepted = rateLimitService.registerRequest(ipAddress);
 
+        System.out.println(request.getRequestURI());
+
         if(isAccepted)
         {
             return true;

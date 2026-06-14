@@ -7,6 +7,7 @@ import java.util.ArrayDeque;
 public class UserRequestInfo 
 {
     private final Queue<Instant> timestamps;
+    private Instant lastActivityTime;
 
     public UserRequestInfo()
     {
@@ -34,6 +35,7 @@ public class UserRequestInfo
 
     public synchronized boolean tryAndRequest(Instant currentTime, int limit, Duration window)
     {
+        this.lastActivityTime = currentTime;
         if(!timestamps.isEmpty())
         {
             cleanup(currentTime, window);
@@ -47,5 +49,10 @@ public class UserRequestInfo
         timestamps.offer(currentTime);
         return true;
 
+    }
+
+    public boolean isInactive(Instant threshold)
+    {
+        return lastActivityTime.isBefore(threshold);
     }
 }

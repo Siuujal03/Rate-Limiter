@@ -12,18 +12,12 @@ import com.example.ratelimiter.Services.RateLimiterService;
 @RestController
 public class RequestController 
 {
-    @Autowired
-    RateLimiterService rateLimiterService;
+    
 
-    @PostMapping("/registerRequest")
-    public ResponseEntity<String> registerRequest(@RequestParam("ip") String ipAddress)
+    @PostMapping("/test")
+    public ResponseEntity<String> registerRequest()
     {
-        if(rateLimiterService.registerRequest(ipAddress))
-        {
-            return new ResponseEntity<>("Accepted", HttpStatus.OK);
-        }
-
-        return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body("Rejected");
+        return ResponseEntity.status(HttpStatus.OK).body("Accepted");
         
     }
 }

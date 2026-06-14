@@ -12,10 +12,10 @@ public class RateLimiterInterceptorConfig implements WebMvcConfigurer
 {
     @Autowired
     private RateLimiterInterceptor rateLimiterReceptor;
-    
+
     @Override
     public void addInterceptors(InterceptorRegistry interceptorRegistry)
     {
-        interceptorRegistry.addInterceptor(rateLimiterReceptor).addPathPatterns("/**");
+        interceptorRegistry.addInterceptor(rateLimiterReceptor).addPathPatterns("/test");
     }
 }
