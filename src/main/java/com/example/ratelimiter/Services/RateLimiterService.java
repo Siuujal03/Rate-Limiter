@@ -14,7 +14,7 @@ import com.example.ratelimiter.Models.UserRequestInfo;
 public class RateLimiterService 
 {
 
-    Map<String, UserRequestInfo> requests;
+    private Map<String, UserRequestInfo> requests;
 
     @Value("${app.request.limit}")
     private int limit;
@@ -36,9 +36,13 @@ public class RateLimiterService
         return userRequestInfo.tryAndRequest(currentTime, limit, window);
     }
 
-    public void cleanup(Instant threshold)
+    public void cleanupInactiveUsers(Instant threshold)
     {
         requests.entrySet().removeIf(entry -> entry.getValue().isInactive(threshold));
     }
 
+    public int getSize()
+    {
+        return requests.size();
+    }
 }

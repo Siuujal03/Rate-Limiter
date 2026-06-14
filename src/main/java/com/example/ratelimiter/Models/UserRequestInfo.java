@@ -51,7 +51,7 @@ public class UserRequestInfo
 
     }
 
-    public boolean isInactive(Instant threshold)
+    public synchronized boolean isInactive(Instant threshold)
     {
         return lastActivityTime.isBefore(threshold);
     }

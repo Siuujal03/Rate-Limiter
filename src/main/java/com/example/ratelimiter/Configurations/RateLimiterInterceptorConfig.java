@@ -16,6 +16,6 @@ public class RateLimiterInterceptorConfig implements WebMvcConfigurer
     @Override
     public void addInterceptors(InterceptorRegistry interceptorRegistry)
     {
-        interceptorRegistry.addInterceptor(rateLimiterReceptor).addPathPatterns("/test");
+        interceptorRegistry.addInterceptor(rateLimiterReceptor).addPathPatterns("/request");
     }
 }
